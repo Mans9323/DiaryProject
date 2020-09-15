@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="m1"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Home</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-sm="8" offset-sm="2" class = "ion-text-center">
+       <ion-item lines="none" [routerLink]= "['/', 'home','tabs','horoscope']">
+         <ion-button shape="round" class="home-nav-button home-large-button" expand="full">
+           <ion-icon size="large" name="sunny"></ion-icon>
+         <ion-label class="home-nav-label">Horoscope</ion-label>
+         </ion-button>
+       </ion-item>
+      </ion-col>
+      <ion-col size="12" size-sm="8" offset-sm="2" class = "ion-text-center">
+       <ion-item lines="none" [routerLink]= "['/', 'home','tabs','diary']">
+         <ion-button shape="round" class="home-nav-button home-large-button" expand="full">
+           <ion-icon size="large" name="pencil"></ion-icon>
+           <ion-label class="home-nav-label">My Diary</ion-label>
+         </ion-button>
+       </ion-item>
+      </ion-col>
+      <ion-col size="12" size-sm="8" offset-sm="2" class = "ion-text-center">
+       <ion-item lines="none">
+         <ion-button shape="round" class="home-nav-button home-small-button" expand="full">
+           <ion-icon size="large" name="star"></ion-icon>
+           <ion-label class="home-nav-label">Rate My Day</ion-label>
+         </ion-button>
+       
+         <ion-button shape="round" class="home-nav-button home-small-button" expand="full">
+           <ion-icon size="large" name="calendar"></ion-icon>
+           <ion-label class="home-nav-label">Star Calendar</ion-label>
+         </ion-button>
+       </ion-item> 
+      </ion-col>
+      <ion-col size="12" size-sm="8" offset-sm="2" class = "ion-text-center">
+       <ion-item lines="none">
+         <ion-button shape="round" class="home-nav-button home-small-button" expand="full">
+           <ion-icon size="large" name="heart"></ion-icon>
+           <ion-label class="home-nav-label">Love Test</ion-label>
+         </ion-button>
+       
+         <ion-button shape="round" class="home-nav-button home-small-button" expand="full">
+           <ion-icon size="large" name="copy"></ion-icon>
+           <ion-label class="home-nav-label">Tarot Cards</ion-label>
+         </ion-button>
+       </ion-item>
+      </ion-col>
+      <ion-col size="12" size-sm="8" offset-sm="2" class = "ion-text-center">
+       <ion-item lines="none">
+         <ion-button shape="round" class="home-nav-button home-small-button" expand="full">
+           <ion-icon size="large" name="ellipse"></ion-icon>
+           <ion-label class="home-nav-label">Wise Crystal Ball</ion-label>
+         </ion-button>
+       
+         <ion-button shape="round" class="home-nav-button home-small-button" expand="full">
+           <ion-icon size="large" name="settings"></ion-icon>
+           <ion-label class="home-nav-label">Settings</ion-label>
+         </ion-button>
+       </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid> 
+ </ion-content>
+ 

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Horoscope Diary</string>
+    <string name="title_activity_main">Horoscope Diary</string>
+    <string name="package_name">com.project.horoscopediary</string>
+    <string name="custom_url_scheme">com.project.horoscopediary</string>
+</resources>

@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="m1"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Horoscope</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-segment  (ionChange)= "onFilterUpdate($event.detail.value)" value="week">
+    <ion-segment-button value="week">Weekly</ion-segment-button>
+    <ion-segment-button value="month">MOnthly</ion-segment-button>
+  </ion-segment>
+  <ion-grid *ngIf = "filterHoroscope.length > 0">
+    <ion-row>
+      <ion-col size="12" size-sm="8" offset-sm="2" class="ion-text-center">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>
+              Read Horoscope
+            </ion-card-title>
+          </ion-card-header>
+          <ion-img src="https://astrologyking.com/wp-content/uploads/best-horoscope.jpg"></ion-img>
+          <ion-card-content>
+              <p>Know what the Universe Hold for you!</p>
+          </ion-card-content>
+        </ion-card>
+        <ion-row>
+          <ion-col size="12" size-sm="8" offset-sm="2" class="ion-text-center">
+            <ion-list>
+              <ion-item *ngFor= "let horoscope of filterHoroscope" 
+              [routerLink]="['/','home','tabs','horoscope', horoscope.id]"
+              detail>
+                <ion-thumbnail slot="start">
+                  <ion-img [src] = "horoscope.imageUrl"></ion-img>
+                </ion-thumbnail>
+                <ion-label>
+                  <h2>{{ horoscope.title }}</h2>
+                  <p>{{ horoscope.dateRange }}</p>
+                </ion-label>
+              </ion-item>
+            </ion-list>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-row>
+      <ion-col size-sm="8" offset-sm="2" class="ion-text-center" *ngIf="!filterHoroscope || filterHoroscope.length <= 0">
+        <p>Horoscope not available.</p>
+      </ion-col>
+     </ion-row>
+  </ion-grid>
+</ion-content>
