@@ -61,3 +61,5 @@ export class HoroscopeDetailPage implements OnInit {
   }
 
 }
+
+//with daily health and carrer horoscope api implemented
