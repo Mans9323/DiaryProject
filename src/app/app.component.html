@@ -1,7 +1,8 @@
 <ion-app>
   <ion-menu side="start" menuId="m1">
     <ion-header>
-      <ion-toolbar>
+      <ion-toolbar color="primary" class="header-title">
+    
         <ion-title>
           Horoscope Diary
         </ion-title>
@@ -11,21 +12,21 @@
     <ion-content>
         <ion-list>
           <ion-menu-toggle>
-          <ion-item lines="none" routerLink="/home/tabs/menu">
-          <ion-icon name="home-outline" slot="start"></ion-icon>
-          <ion-label>Home</ion-label>
+          <ion-item detail="false" lines="none" routerLink="/home/tabs/menu">
+          <ion-icon name="home-outline" color="primary" slot="start"></ion-icon>
+          <ion-label color="primary">Home</ion-label>
         </ion-item>
       </ion-menu-toggle>
       <ion-menu-toggle>
-        <ion-item lines="none" routerLink="/ratings">
-          <ion-icon name="star-outline" slot="start"></ion-icon>
-          <ion-label>Rate you Day</ion-label>
+        <ion-item detail="false" lines="none" routerLink="/ratings">
+          <ion-icon name="star-outline" color="primary" slot="start"></ion-icon>
+          <ion-label color="primary">Rate you Day</ion-label>
         </ion-item>
       </ion-menu-toggle>
       <ion-menu-toggle>
-        <ion-item lines="none" (click)="onLogout()" button>
-          <ion-icon name="exit" slot="start"></ion-icon>
-          <ion-label>Logout</ion-label>
+        <ion-item detail="false" lines="none" (click)="onLogout()" button>
+          <ion-icon name="exit" color="primary" slot="start"></ion-icon>
+          <ion-label color="primary">Logout</ion-label>
         </ion-item>
       </ion-menu-toggle>
         </ion-list>

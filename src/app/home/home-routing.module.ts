@@ -25,7 +25,7 @@ const routes: Routes = [
                 loadChildren: () => import('./menu/horoscope/horoscope.module').then(m=> m.HoroscopePageModule)
               },
               {
-                path: ':horoscopeId',
+                path: ':title',
                 loadChildren: () => import('./menu/horoscope/horoscope-detail/horoscope-detail.module').then(m=>m.HoroscopeDetailPageModule)
               }
             ]

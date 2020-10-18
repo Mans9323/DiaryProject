@@ -8,20 +8,37 @@
 </ion-header>
 
 <ion-content>
+  <ion-segment  (ionChange)= "onFilterUpdate($event.detail.value)" value="daily" class="ion-padding">
+    <ion-segment-button value="daily">General</ion-segment-button>
+    <ion-segment-button value="health">Health</ion-segment-button>
+    <ion-segment-button value="carrer">Carrer</ion-segment-button>
+  </ion-segment>
   <ion-grid class="ion-no-padding">
     <ion-row>
       <ion-col size-sm="6" offset-sm="3">
         <ion-img [src]= "horoscope.imageUrl"></ion-img>
       </ion-col>
     </ion-row>
+
+    <ion-card><ion-card-content class="ion-text-center">
     <ion-row>
       <ion-col size-sm="6" offset-sm="3" class="ion-text-center"  >
         <h1>{{ horoscope.title }}</h1>
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col size-sm="6" offset-sm="3" class="ion-text-start">
-        <p>{{ horoscope.description }}</p>
+      <ion-col size-sm="6" offset-sm="3" class="ion-text-center">
+        <p>{{ horoscope.dateRange }}</p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size-sm="6" offset-sm="3" >
+        <div *ngIf = "isloading">
+          <ion-spinner color="primary" class="ion-text-center"></ion-spinner>
+        </div>
+        <div *ngIf="!isloading" class="ion-text-start"> 
+        <p>{{ this.descHoroscope?.description }}</p>
+        </div>
       </ion-col>
     </ion-row>
     <ion-row>
@@ -29,5 +46,8 @@
         <ion-button color="primary">Share</ion-button>
       </ion-col>
     </ion-row>
+  </ion-card-content></ion-card>
+
+
   </ion-grid>
 </ion-content>

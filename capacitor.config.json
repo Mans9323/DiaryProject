@@ -1,5 +1,5 @@
 {
-  "appId": "io.ionic.starter",
+  "appId": "com.project.horoscopediary",
   "appName": "horoscope demo",
   "bundledWebRuntime": false,
   "npmClient": "npm",
