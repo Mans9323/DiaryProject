@@ -27,6 +27,23 @@ const routes: Routes = [
               {
                 path: ':title',
                 loadChildren: () => import('./menu/horoscope/horoscope-detail/horoscope-detail.module').then(m=>m.HoroscopeDetailPageModule)
+              },
+              {
+                path: 'user-horoscope',
+                loadChildren:() => import('./menu/horoscope/user-horoscope/user-horoscope.module').then(m=> m.UserHoroscopePageModule)
+              }
+            ]
+          },
+          {
+            path: 'horoscopetrait',
+            children:[
+              {
+                path: '',
+                loadChildren: () => import('./menu/horoscopetrait/horoscopetrait.module').then(m=>m.HoroscopetraitPageModule)
+              },
+              {
+                path: ':title',
+                loadChildren: () => import('./menu/horoscopetrait/horoscopetrait-detail/horoscopetrait-detail.module').then(m=>m.HoroscopetraitDetailPageModule)
               }
             ]
           },
@@ -59,9 +76,28 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'profile',
+    children: [{
+      path: '',
+      loadChildren: () => import('./profile/profile.module').then(m=> m.ProfilePageModule)
+    }]
+  },
+  {
     path: '',
     redirectTo: '/home/tabs/menu',
     pathMatch: 'full'
+  },
+  {
+    path: 'viewprofile',
+    children: [{
+      path: '',
+      loadChildren: () => import('./viewprofile/viewprofile.module').then( m => m.ViewprofilePageModule)
+    },
+    {
+      path: 'edit',
+      loadChildren: () => import('./editprofile/editprofile.module').then( m => m.EditprofilePageModule)
+    }
+   ]
   }
 ];
 

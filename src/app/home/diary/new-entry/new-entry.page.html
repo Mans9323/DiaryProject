@@ -3,9 +3,9 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/home/tabs/diary"></ion-back-button>
     </ion-buttons>
-    <ion-title>New Entry</ion-title>
+    <ion-title>New Diary Page</ion-title>
     <ion-buttons slot="primary">
-      <ion-button (click)="onCreateEntry()" [disabled]="!form.valid  || !form.get('image').value">
+      <ion-button (click)="onCreateEntry()" [disabled]="!form.valid">
         <ion-icon name="checkmark" slot="icon-only"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -13,12 +13,22 @@
 </ion-header>
 
 <ion-content>
+  <h2 style="padding-top: 8px; margin-top: -10px; font-family:'Courier New', Courier, monospace;" class = "ion-text-center welcome-background">
+    <span 
+    style="font-size: large;display: block; margin-top: 12px; margin-bottom: -32px;">
+    Let's have a chat!</span>
+    <br/>
+    <span 
+    style="font-size: medium;padding: 16px; display: block;">
+  </span>
+  </h2>
   <form [formGroup]="form">
   <ion-grid>
-    <ion-row>
+    <ion-card>
+      <ion-row>
       <ion-col size-sm="6" offset-sm="3">
-        <ion-item>
-          <ion-label position="floating">Dear Diary...</ion-label>
+        <ion-item style="padding-right: 20px;">
+          <ion-label color="primary" position="floating">Your day in 3 words:</ion-label>
           <ion-input 
           type="text" 
           autocomplete 
@@ -29,48 +39,63 @@
     </ion-row>
     <ion-row>
       <ion-col size-sm="6" offset-sm="3">
-        <ion-item>
-          <ion-label>Mood?</ion-label>
+        <ion-item lines="none" style="padding-right: 20px; padding-bottom: 20px;">
+          <ion-label color="primary">Mood?</ion-label>
           <ion-select placeholder="Mood Today" formControlName="mood">
-            <ion-select-option value="happy">Happy
+            <ion-select-option value="Happy">Happy
             </ion-select-option>
-            <ion-select-option value="sad">Sad
+            <ion-select-option value="Sad">Sad
             </ion-select-option>
-            <ion-select-option value="yawn">Sleepy
+            <ion-select-option value="Excited">Excited
             </ion-select-option>
-            <ion-select-option value="bore">Bored
+            <ion-select-option value="Sleepy">Sleepy
             </ion-select-option>
+            <ion-select-option value="Bored">Bored
+            </ion-select-option>
+            <ion-select-option value="Successful">Successful
+            </ion-select-option>
+          <ion-select-option value="Tired">Tired
+          </ion-select-option>
+          <ion-select-option value="Confident">Confident
+          </ion-select-option>
           </ion-select>
         </ion-item>
       </ion-col>
     </ion-row>
+  </ion-card>
+  <ion-card>
     <ion-row>
       <ion-col size-sm="6" offset-sm="3">
-        <ion-item>
-          <ion-label position="floating">Tell us about your day</ion-label>
-          <ion-textarea rows="3" formControlName="description"></ion-textarea>
+        <ion-item style="padding-right: 20px;">
+          <ion-label position="floating" color="primary">Well, please tell me more!</ion-label>
+          <ion-textarea placeholder="Dear diary..."  rows="3" formControlName="description"></ion-textarea>
         </ion-item>
       </ion-col>
     </ion-row>
     <ion-row *ngIf="!form.get('description').valid && form.get('description').touched">
       <ion-col size-sm="6" offset-sm="3">
-        <p>Must me betweed 1 and 360 characters.</p>
+        <p style="color: red;padding: 0px 20px; font-size: 0.8em;">*Must be between 1 and 360 characters.</p>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col size-sm="3" offset-sm="3">
-        <ion-item>
-          <ion-label position="floating">Select Date</ion-label>
-          <ion-datetime min="2020-01-01" max="2022-12-31" formControlName="dateRange"></ion-datetime>
+        <ion-item lines="none" style="padding-right: 20px; padding-bottom: 20px;">
+          <ion-label color="primary" position="floating">Select Date</ion-label>
+          <ion-datetime style="opacity: 0.6; font-size: small;" min="2020-01-01" max="2022-12-31" formControlName="dateRange"></ion-datetime>
         </ion-item>
       </ion-col>
       <ion-col size-sm="3">
-        <ion-item>
-          <ion-label position="floating">Select Time</ion-label>
-          <ion-datetime displayFormat="HH:mm A" formControlName="time"></ion-datetime>
+        <ion-item lines="none" style="padding-right: 20px;">
+          <ion-label color="primary" position="floating">Select Time</ion-label>
+          <ion-datetime style="opacity: 0.6; font-size: small;" displayFormat="HH:mm A" formControlName="time"></ion-datetime>
         </ion-item>
       </ion-col>
     </ion-row>
+  </ion-card>
+  <ion-card style="padding-bottom: 20px;">
+    <ion-item lines="none" class="ion-text-center">
+      <ion-label style="padding-top: 10px;" color="primary">Upload Media:</ion-label>
+    </ion-item>
     <ion-row>
       <ion-col size-sm="6" offset-sm="3">
         <app-location-picker [showPreview]="form.get('location').value" (locationPick)="onLocationPicked($event)"></app-location-picker>
@@ -81,6 +106,14 @@
         <app-image-picker [showPreview]="form.get('image').value" (imagePick)="onImagePicked($event)"></app-image-picker>
       </ion-col>
     </ion-row>
+  </ion-card>
+  <ion-row>
+    <ion-col size-sm="6" offset-sm="3" class="ion-text-center">
+      <ion-button (click)="onCreateEntry()" [disabled]="!form.valid">
+        <ion-icon name="checkmark" slot="icon-only"></ion-icon>Save
+      </ion-button>
+    </ion-col>
+  </ion-row>
   </ion-grid>
 </form>
 </ion-content>

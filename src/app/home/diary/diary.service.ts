@@ -1,43 +1,10 @@
 import { Injectable } from '@angular/core';
-import { take, map, tap, delay, switchMap, switchMapTo } from 'rxjs/operators';
+import { take, map, tap, switchMap } from 'rxjs/operators';
 import { Entries } from './diary.model';
 import { AuthService } from '../../auth/auth.service';
 import { BehaviorSubject, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { PlaceLocation } from './location.model';
-
-// [
-//   new Entries(
-//     'd1',
-//     'Quarantine Blues',
-//     'happy',
-//     new Date('2020-08-15'),
-//     '12:30',
-//     'Worked on my masters project. Less time have to put in a lot more hours and finish this thing. The run for my fundraiser is going well 86miles done and 14 more to go will finish them by the end of the week',
-//     'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/aries-zodiac-sign-abstract-night-sky-background-royalty-free-image-1584536731.jpg',
-//     'abc'
-// ),
-// new Entries(
-//     'd2',
-//     'Lazy Day',
-//     'sad',
-//     new Date(),
-//     new Date().toISOString(),
-//     'Started the day with the project work. Storm ellen is hitting hard here with the weather being gloomy and rain all day. Couldnt go out for the run today as well.',
-//     'https://imgk.timesnownews.com/story/taurus.jpg?tr=w-400,h-300,fo-auto',
-//     'abc'
-// ),
-// new Entries(
-//     'd3',
-//     'Lazy Day',
-//     'sad',
-//     new Date(),
-//     new Date().toISOString(),
-//     'Started the day with the project work. Storm ellen is hitting hard here with the weather being gloomy and rain all day. Couldnt go out for the run today as well.',
-//     'https://imgk.timesnownews.com/story/taurus.jpg?tr=w-400,h-300,fo-auto',
-//     'abc'
-// )
-// ]
 
 interface EntryData {
 dateRange: string;
@@ -195,13 +162,6 @@ export class DiaryService {
         this._entry.next(diaryEntries.concat(newEntry));
       })
     );
-    // return this.diaryEntries.pipe(
-    //   take(1), 
-    //   delay(1000), 
-    //   tap(diaryEntries => {
-    //     this._entry.next(diaryEntries.concat(newEntry));
-    //   })
-    // );
   }
 
   cancelEntry(entryId: string) {
@@ -221,7 +181,15 @@ export class DiaryService {
     );
   }
 
-  updateEntry(entryId: string, title: string, mood: string, description: string) {
+  updateEntry(
+    entryId: string, 
+    title: string, 
+    mood: string, 
+    description: string, 
+    dateRange: Date,
+    time: string, 
+    imageUrl: string,
+    location: PlaceLocation) {
     let updatedEntries: Entries[];
     let fetchedToken: string;
     return this.authService.token.pipe(
@@ -246,12 +214,12 @@ export class DiaryService {
         oldEntries.id, 
         title,
         mood, 
-        oldEntries.dateRange,
-        oldEntries.time,
+        dateRange,
+        time,
         description,
-        oldEntries.imageUrl, 
+        imageUrl, 
         oldEntries.userId,
-        oldEntries.location
+        location
         );
         return this.http.put(
           `https://diary-project-13101.firebaseio.com/diary-entries/${entryId}.json?auth=${fetchedToken}`,

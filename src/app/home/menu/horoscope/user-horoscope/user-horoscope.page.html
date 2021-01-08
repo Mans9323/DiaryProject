@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home/tabs/horoscope"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Hi {{ userSign?.firstName }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-content>
+    
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3">
+          <div *ngIf = "userLoading" class="ion-text-center">
+            <ion-spinner color="primary"></ion-spinner>
+          </div>
+          <ion-img *ngIf = "!userLoading"[src]= "userSign?.imageUrl"></ion-img>
+        </ion-col>
+      </ion-row>
+      <ion-segment  (ionChange)= "onFilterUpdate($event.detail.value)" value="daily" class="ion-padding"
+    style="background: #f7f7f7; border-radius: 0;">
+      <ion-segment-button value="daily">General</ion-segment-button>
+      <ion-segment-button value="health">Health</ion-segment-button>
+      <ion-segment-button value="carrer">Career</ion-segment-button>
+    </ion-segment>
+      <ion-card>
+      <ion-card-content class="ion-text-center">
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3" class="ion-text-center"  >
+          <h1>{{ userSign?.title }}</h1>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3" class="ion-text-center">
+          <p>{{ userSign?.dateRange }}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3" >
+          <div *ngIf = "isloading">
+            <ion-spinner color="primary" class="ion-text-center"></ion-spinner>
+          </div>
+          <div *ngIf="!isloading" class="ion-text-start"> 
+          <p>{{ this.descHoroscope?.description }}</p>
+          </div>
+        </ion-col>
+      </ion-row>
+      <!-- <ion-row>
+        <ion-col size-sm="6" offset-sm="3" class="ion-text-center">
+          <ion-button color="primary">Share</ion-button>
+        </ion-col>
+      </ion-row> -->
+    </ion-card-content></ion-card>
+    </ion-grid>
+</ion-content>

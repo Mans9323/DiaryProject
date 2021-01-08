@@ -34,10 +34,11 @@ function base64toBlob(base64Data, contentType) {
 })
 export class NewEntryPage implements OnInit {
   form: FormGroup;
+  private defaultImage = '/assets/img/default.jpg';
 
   constructor(private diaryService: DiaryService, private router: Router, private loadingCtrl: LoadingController) { }
 
-  ngOnInit() {
+  ngOnInit() { 
     this.form = new FormGroup({
       title: new FormControl(null, {
         updateOn: 'blur',
@@ -59,9 +60,7 @@ export class NewEntryPage implements OnInit {
         updateOn: 'blur',
         validators: [Validators.required]
       }),
-      location: new FormControl(null, {
-        validators: [Validators.required]
-      }),
+      location: new FormControl(null),
       image: new FormControl(null)
     });
   }
@@ -90,8 +89,8 @@ export class NewEntryPage implements OnInit {
     this.form.patchValue({ image: imageFile });
   }
 
-  onCreateEntry() {
-    if(!this.form.valid || !this.form.get('image').value){
+  onCreateEntry()  {
+    if(!this.form.valid){
       return;
     }
     console.log(this.form.value);
@@ -99,7 +98,7 @@ export class NewEntryPage implements OnInit {
       message: 'Creating Memories....'
     }).then(loadingEl => {
       loadingEl.present();
-      this.diaryService.uploadImage(this.form.get('image').value).pipe(switchMap(uploadRes => {
+      if(!this.form.get('image').value){
         return this.diaryService.addDiaryEntry(
           this.form.value.title,
           this.form.value.mood,
@@ -107,17 +106,33 @@ export class NewEntryPage implements OnInit {
           this.form.value.time,
           this.form.value.description,
           this.form.value.location,
-          uploadRes.imageUrl
-        );
-      })
-      )
-      .subscribe(() => {
-        loadingEl.dismiss();
-        this.form.reset();
-        this.router.navigate(['/home/tabs/diary']);
-      });
+          this.defaultImage
+        ).subscribe(() => {
+          loadingEl.dismiss();
+          this.form.reset();
+          this.router.navigate(['/home/tabs/diary']);
+        })
+        
+      }else{
+        this.diaryService.uploadImage(this.form.get('image').value).pipe(switchMap(uploadRes => {
+          return this.diaryService.addDiaryEntry(
+            this.form.value.title,
+            this.form.value.mood,
+            new Date(this.form.value.dateRange),
+            this.form.value.time,
+            this.form.value.description,
+            this.form.value.location,
+            uploadRes.imageUrl
+          );
+        })
+        )
+        .subscribe(() => {
+          loadingEl.dismiss();
+          this.form.reset();
+          this.router.navigate(['/home/tabs/diary']);
+        });
+      }
     });
     
   }
-
 }

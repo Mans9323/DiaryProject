@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-menu',
@@ -7,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuPage implements OnInit {
 
-  constructor() { }
+  subscribe : any;
+  constructor(public platform: Platform) { }
 
   ngOnInit() {
   }
+
+  ionViewDidEnter() {
+    this.subscribe = this.platform.backButton.subscribeWithPriority(9999, () => {
+      // do nothing
+    });
+  }
+  
+  ionViewWillLeave() {
+    this.subscribe.unsubscribe();
+  }
+
 
 }

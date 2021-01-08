@@ -11,6 +11,10 @@ const routes: Routes = [
   {
     path: 'horoscope-detail',
     loadChildren: () => import('./horoscope-detail/horoscope-detail.module').then( m => m.HoroscopeDetailPageModule)
+  },
+  {
+    path: 'user-horoscope',
+    loadChildren: () => import('./user-horoscope/user-horoscope.module').then( m => m.UserHoroscopePageModule)
   }
 ];
 

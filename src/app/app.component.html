@@ -3,30 +3,51 @@
     <ion-header>
       <ion-toolbar color="primary" class="header-title">
     
-        <ion-title>
-          Horoscope Diary
+        <ion-title 
+        style="padding-left: 50px;
+        padding-right: 50px;">
+          <h1 style="font-size: 20px;
+          margin-top: 8px;">Horoscope Diary</h1>
         </ion-title>
       </ion-toolbar>
     </ion-header>
 
-    <ion-content>
-        <ion-list>
+    <ion-content color="primary"  >
+        <ion-list class="ion-no-padding">
           <ion-menu-toggle>
-          <ion-item detail="false" lines="none" routerLink="/home/tabs/menu">
-          <ion-icon name="home-outline" color="primary" slot="start"></ion-icon>
-          <ion-label color="primary">Home</ion-label>
+          <ion-item detail="false" color="primary" lines="full" routerLink="/home/tabs/menu">
+            <ion-icon name="home" slot="start"></ion-icon>
+          <ion-label>Home</ion-label>
         </ion-item>
       </ion-menu-toggle>
       <ion-menu-toggle>
-        <ion-item detail="false" lines="none" routerLink="/ratings">
-          <ion-icon name="star-outline" color="primary" slot="start"></ion-icon>
-          <ion-label color="primary">Rate you Day</ion-label>
+        <ion-item detail="false" color="primary" lines="full" [routerLink]= "['/', 'home','tabs','horoscope']">
+        <ion-icon name="moon" slot="start"></ion-icon>
+        <ion-label>Horoscope</ion-label>
+      </ion-item>
+    </ion-menu-toggle>
+    <ion-menu-toggle>
+      <ion-item detail="false" color="primary" lines="full" [routerLink]= "['/', 'home','tabs','diary']">
+      <ion-icon name="create" slot="start"></ion-icon>
+      <ion-label>Diary</ion-label>
+    </ion-item>
+  </ion-menu-toggle>
+  <ion-menu-toggle>
+    <ion-item detail="false" color="primary" lines="full" [routerLink]= "['/', 'home','tabs','horoscopetrait']">
+    <ion-icon name="star" slot="start"></ion-icon>
+    <ion-label>Sign Traits</ion-label>
+  </ion-item>
+</ion-menu-toggle>
+      <ion-menu-toggle>
+        <ion-item color="primary" detail="false" lines="full" routerLink="/home/viewprofile">
+          <ion-icon name="person-circle" slot="start"></ion-icon>
+          <ion-label>Profile</ion-label>
         </ion-item>
       </ion-menu-toggle>
       <ion-menu-toggle>
-        <ion-item detail="false" lines="none" (click)="onLogout()" button>
-          <ion-icon name="exit" color="primary" slot="start"></ion-icon>
-          <ion-label color="primary">Logout</ion-label>
+        <ion-item detail="false" color="primary" lines="full" (click)="onLogout()" button>
+          <ion-icon name="exit" slot="start"></ion-icon>
+          <ion-label>Logout</ion-label>
         </ion-item>
       </ion-menu-toggle>
         </ion-list>

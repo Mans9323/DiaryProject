@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar color="primary" class="header-title">
+    <ion-buttons slot="start">
+      <ion-menu-button menu="m1"></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="menu-title">
+      Horoscope Diary
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  
+  <ion-grid *ngIf = "loadHoroscope.length > 0">
+    <ion-row>
+      <ion-col size="12" size-sm="8" offset-sm="2" class="ion-text-center">
+        <ion-card>
+          <ion-img src='/assets/img/signtraitsgeneral.jpg'></ion-img>
+          <ion-card-content>
+              <p>Choose a sign below to learn sign personalities, love traits, best matches and more!</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+        <ion-row>
+          <ion-col size="12" size-sm="8" offset-sm="2" class="sign-card ion-align-self-start"
+          style="margin-left:5px;">
+           
+              <ion-item lines="none" detail="false" class="ion-no-padding sign-col" *ngFor= "let horoscope of loadHoroscope" 
+              [routerLink]="['/','home','tabs','horoscopetrait', horoscope.title]">
+              <ion-card>
+                
+                  <ion-img [src] = "horoscope.imageUrl"></ion-img>
+                <ion-card-content class="ion-text-center" style="padding: 8px 2px;">
+                  <p style="font-weight: 600;">{{ horoscope.title }}</p>
+                  <p style="font-size: 12px;">{{ horoscope.dateRange }}</p>
+                </ion-card-content>
+              </ion-card>
+              </ion-item>
+          </ion-col>
+        </ion-row>
+
+
+
+    <ion-row>
+      <ion-col size-sm="8" offset-sm="2" class="ion-text-center" *ngIf="!loadHoroscope || loadHoroscope.length <= 0">
+        <p>Horoscope not available.</p>
+      </ion-col>
+     </ion-row>
+  </ion-grid>
+  
+<ion-buttons style="display: none;">
+  <ion-back-button defaultHref="/home/tabs/menu"></ion-back-button>
+</ion-buttons>
+</ion-content>

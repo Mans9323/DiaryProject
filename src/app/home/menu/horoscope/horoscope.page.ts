@@ -1,33 +1,49 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { HoroscopeService } from '../horoscope.service';
 import { Horoscope } from '../horoscope.model';
-import { SegmentChangeEventDetail } from '@ionic/core';
+import { UserHoroscope } from '../userHoroscope.model';
+import { Subscription } from 'rxjs';
+import { Platform } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-horoscope',
   templateUrl: './horoscope.page.html',
   styleUrls: ['./horoscope.page.scss'],
 })
-export class HoroscopePage implements OnInit {
+export class HoroscopePage implements OnInit, OnDestroy {
   loadHoroscope: Horoscope[];
-  // filterHoroscope: Horoscope[];
-  // private filter = 'week';
+  userSign : UserHoroscope;
+  horoscopeSub: Subscription;
+  subscribe : any;
 
-  constructor(private horoscopeService: HoroscopeService) { }
+  constructor(private horoscopeService: HoroscopeService,public platform: Platform) { }
 
   ngOnInit() {
     this.loadHoroscope = this.horoscopeService.horoscopes;
-    // this.filterHoroscope = this.loadHoroscope;
-    // this.onFilterUpdate(this.filter);
+    this.horoscopeSub = this.horoscopeService.getUserHoroscope().subscribe(resData => {
+      this.userSign = resData;
+    })
   }
 
-  // onFilterUpdate(filter: string) {
-  //   if(filter === "week") {
-  //     this.filterHoroscope = this.loadHoroscope.filter(horoscope => horoscope.filterId === 'week');
-  //   }else{
-  //     this.filterHoroscope = this.loadHoroscope.filter(horoscope => horoscope.filterId === 'month');
-  //   }
-  //   this.filter = filter;
-  // }
-  
+  ionViewWillEnter() {
+    this.horoscopeSub = this.horoscopeService.getUserHoroscope().subscribe(resData => {
+      this.userSign = resData;
+    })
+    this.subscribe = this.platform.backButton.subscribeWithPriority(9999, () => {
+      // do nothing
+    });
+  }
+
+  ionViewWillLeave() {
+    this.subscribe.unsubscribe();
+  }
+
+  ngOnDestroy(){
+    if(this.horoscopeSub){
+      this.horoscopeSub.unsubscribe();
+    }
+  }
 }
+
+  

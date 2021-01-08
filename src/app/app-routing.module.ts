@@ -12,11 +12,6 @@ const routes: Routes = [
     path: 'home',
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule),
     canLoad: [AuthGuard]
-  },
-  {
-    path: 'ratings',
-    loadChildren: () => import('./ratings/ratings.module').then( m => m.RatingsPageModule),
-    canLoad: [AuthGuard]
   }
 ];
 

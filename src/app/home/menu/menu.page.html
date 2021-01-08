@@ -9,57 +9,64 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content class="ion-no-padding">
+  <h2 style="padding-top: 8px; margin-top: -10px; font-family:'Courier New', Courier, monospace;" class = "ion-text-center welcome-background">
+    <span 
+    style="font-size: large;display: block; margin-top: 12px; margin-bottom: -32px;">
+    Hey stranger!</span>
+    <br/>
+    <span 
+    style="font-size: medium;padding: 16px; display: block;">
+    How's life going?
+  </span>
+  </h2>
   <ion-grid>
     <ion-row>
       <ion-col size="12" size-sm="8" offset-sm="2" class = "ion-text-center">
-       <ion-item detail="false" lines="none" [routerLink]= "['/', 'home','tabs','horoscope']">
-         <ion-button color="secondary" shape="round" class="home-nav-button home-large-button" expand="full">
-         <ion-label class="home-nav-label">Horoscope</ion-label>
-         </ion-button>
-       </ion-item>
-      </ion-col>
+        <ion-item lines="none" detail="false" class="ion-no-padding sign-col" >
+          <ion-card class="menu-card" [routerLink]= "['/', 'home','tabs','horoscope']">
+    
+            <ion-img src='/assets/img/menu-horoscope2.jpg'></ion-img>
+              
+            <ion-card-content class="ion-text-center" style="padding: 8px 6px;">
+              <p style="font-weight: 600;">Horoscope </p>
+              <p style="font-size: 12px;"> Want to check your daily horoscope? It's over here!</p>
+            </ion-card-content>
+          </ion-card>
+          </ion-item>
+        </ion-col>    
       <ion-col size="12" size-sm="8" offset-sm="2" class = "ion-text-center">
-       <ion-item detail="false" lines="none" [routerLink]= "['/', 'home','tabs','diary']">
-         <ion-button color="secondary" shape="round" class="home-nav-button home-large-button" expand="full">
-           <ion-label class="home-nav-label">My Diary</ion-label>
-         </ion-button>
-       </ion-item>
-      </ion-col>
-      <ion-col size="12" size-sm="8" offset-sm="2" class = "ion-text-center">
-       <ion-item detail="false" lines="none">
-         <ion-button color="secondary" shape="round" class="home-nav-button home-small-button" expand="full">
-           <ion-label class="home-nav-label">Rate My Day</ion-label>
-         </ion-button>
-       
-         <ion-button color="secondary" shape="round" class="home-nav-button home-small-button" expand="full">
-           <ion-label class="home-nav-label">Star Calendar</ion-label>
-         </ion-button>
+        <ion-item detail="false" lines="none" class="ion-no-padding sign-col">
+          <ion-card class="menu-card" [routerLink]= "['/', 'home','tabs','diary']">
+  
+            <ion-img src='/assets/img/menu-diary.jpg'></ion-img>
+              
+            <ion-card-content class="ion-text-center" style="padding: 8px 6px;">
+              <p style="font-weight: 600;">Diary </p>
+              <p style="font-size: 12px;"> How was your day? Tell me about it a little maybe.</p>
+            </ion-card-content>
+          </ion-card>
+  
        </ion-item> 
       </ion-col>
       <ion-col size="12" size-sm="8" offset-sm="2" class = "ion-text-center">
-       <ion-item detail="false" lines="none">
-         <ion-button color="secondary" shape="round" class="home-nav-button home-small-button" expand="full">
-           <ion-label class="home-nav-label">Love Test</ion-label>
-         </ion-button>
-       
-         <ion-button color="secondary" shape="round" class="home-nav-button home-small-button" expand="full">
-           <ion-label class="home-nav-label">Tarot Cards</ion-label>
-         </ion-button>
-       </ion-item>
-      </ion-col>
-      <ion-col size="12" size-sm="8" offset-sm="2" class = "ion-text-center">
-       <ion-item detail="false" lines="none">
-         <ion-button color="secondary" shape="round" class="home-nav-button home-small-button" expand="full">
-           <ion-label class="home-nav-label">Wise Crystal Ball</ion-label>
-         </ion-button>
-       
-         <ion-button color="secondary" shape="round" class="home-nav-button home-small-button" expand="full">
-           <ion-label class="home-nav-label">Settings</ion-label>
-         </ion-button>
-       </ion-item>
-      </ion-col>
+        <ion-item lines="none" detail="false" class="ion-no-padding sign-col" >
+          <ion-card class="menu-card" [routerLink]= "['/', 'home','tabs','horoscopetrait']">
+    
+            <ion-img src='/assets/img/menu-sign.jpg'></ion-img>
+              
+            <ion-card-content class="ion-text-center" style="padding: 8px 6px;">
+              <p style="font-weight: 600;">Sign Traits</p>
+              <p style="font-size: 12px;">Wanna know more about zodiac signs?</p>
+            </ion-card-content>
+          </ion-card>
+          </ion-item>
+        </ion-col>
     </ion-row>
   </ion-grid> 
+  
+<ion-buttons style="display: none;">
+  <ion-back-button defaultHref="/home/tabs/menu"></ion-back-button>
+</ion-buttons>
  </ion-content>
  

@@ -5,8 +5,7 @@ import { NavController, LoadingController, AlertController, ModalController } fr
 import { DiaryService } from '../diary.service';
 import { Subscription } from 'rxjs';
 import { MapModalComponent } from '../../../shared/map-modal/map-modal.component';
-import { AuthService } from '../../../auth/auth.service';
-import { switchMap, take } from 'rxjs/operators';
+import { UserHoroscope } from '../../menu/userHoroscope.model';
 
 @Component({
   selector: 'app-view-entry',
@@ -17,6 +16,9 @@ export class ViewEntryPage implements OnInit, OnDestroy{
   entry: Entries;
   isLoading = false;
   entrySub: Subscription;
+  cardImage: string;
+  userSign : UserHoroscope;
+  horoscopeSub: Subscription;
   
   constructor(
     private route: ActivatedRoute, 
@@ -26,7 +28,6 @@ export class ViewEntryPage implements OnInit, OnDestroy{
     private router: Router,
     private alertCtrl: AlertController,
     private modalCtrl: ModalController,
-    private authService: AuthService
     ) { }
 
   ngOnInit() {
@@ -57,14 +58,25 @@ export class ViewEntryPage implements OnInit, OnDestroy{
   }
 
   onCancelEntry(entryId: string){
-    this.loadingCtrl.create({message: 'Deleting...'}).then(loadingEl => {
-      loadingEl.present();
-      this.diaryService.cancelEntry(entryId).subscribe(() => {
-        loadingEl.dismiss();
-        this.router.navigate(['/home/tabs/diary']);
-      });
-    });
-    
+    this.alertCtrl.create({
+      header: 'Delete Page',
+      message: 'Are you sure you want to delete this page?',
+      buttons: [{
+        text: 'Yes',
+        handler: () => {
+          this.loadingCtrl.create({message: 'Deleting...'}).then(loadingEl => {
+            loadingEl.present();
+            this.diaryService.cancelEntry(entryId).subscribe(() => {
+              loadingEl.dismiss();
+              this.router.navigate(['/home/tabs/diary']);
+            });
+          });
+        }
+      },
+    {
+      text: 'No'
+    }]
+    }).then(alertEl => alertEl.present());
   }
 
   onShowFullMap() {
@@ -79,10 +91,21 @@ export class ViewEntryPage implements OnInit, OnDestroy{
     })
   }
 
+  showAlert(){
+    this.alertCtrl.create({
+      header: 'Location Not Found',
+      message: 'Edit to enter location',
+      buttons: [{
+        text: 'Okay'
+      }]
+    }).then(alertEl => alertEl.present());
+  }
+
 
   ngOnDestroy() {
-    if(this.entrySub){
+    if(this.entrySub && this.horoscopeSub){
       this.entrySub.unsubscribe();
+      this.horoscopeSub.unsubscribe();
     }
   }
 }
